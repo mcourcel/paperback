@@ -8,12 +8,17 @@
  */
 
 #include "controls.hpp"
-#include "constants.hpp"
+#include <algorithm>
 #ifdef __WXMSW__
-#include <windows.h>
+#include <windef.h>
+#include <winuser.h>
 #endif
+#include <wx/event.h>
+#include <wx/slider.h>
+#include <wx/window.h>
 
-accessible_slider::accessible_slider(wxWindow* parent, wxWindowID id, int value, int minValue, int maxValue) : wxSlider(parent, id, value, minValue, maxValue) {
+// NOLINTNEXTLINE(misc-include-cleaner) - False positive: wx/slider.h is correctly included, wxSlider is available
+accessible_slider::accessible_slider(wxWindow* parent, wxWindowID id, int value, int min_value, int max_value) : wxSlider(parent, id, value, min_value, max_value) {
 	Bind(wxEVT_CHAR, &accessible_slider::on_char, this);
 }
 
